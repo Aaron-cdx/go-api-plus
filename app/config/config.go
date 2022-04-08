@@ -7,4 +7,6 @@ const (
 
 	AppReadTimeout  = 120
 	AppWriteTimeout = 120
+
+	AppAccessLogName = "./log/access.log"
 )
