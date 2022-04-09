@@ -8,5 +8,5 @@ func JsonEncode(v interface{}) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(bytes), nil
+	return string(bytes) + "\n", nil
 }

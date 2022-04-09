@@ -8,6 +8,7 @@ import (
 	"go-api-plus/app/config"
 	"go-api-plus/app/utils/jsonutils"
 	"go-api-plus/app/utils/responseutils"
+	"go-api-plus/app/utils/timeutils"
 	"log"
 	"net/http"
 	"os"
@@ -42,7 +43,7 @@ func SetUp() gin.HandlerFunc {
 		ctx.Writer = bodyLogWriter
 
 		// start time
-		startTime := time.Now()
+		startTime := timeutils.GetCurrentMilliTime()
 
 		// process request
 		ctx.Next()
@@ -64,7 +65,7 @@ func SetUp() gin.HandlerFunc {
 		}
 
 		// end time
-		//entTime := timeutils.GetCurrentMilliTime()
+		entTime := timeutils.GetCurrentMilliTime()
 
 		if ctx.Request.Method == http.MethodPost {
 			_ = ctx.Request.ParseForm()
@@ -86,7 +87,7 @@ func SetUp() gin.HandlerFunc {
 		accessFormat["response_msg"] = respMsg
 		accessFormat["response_data"] = respData
 
-		accessFormat["elapse_time"] = fmt.Sprintf("%vms", time.Since(startTime))
+		accessFormat["elapse_time"] = fmt.Sprintf("%vms", entTime-startTime)
 
 		accessLogJson, _ := jsonutils.JsonEncode(accessFormat)
 

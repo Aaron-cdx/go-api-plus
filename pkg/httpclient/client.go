@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"go-api-plus/pkg/errors"
 	"go-api-plus/pkg/trace"
+	"net/http"
 	"net/url"
 	"time"
 )
@@ -21,7 +22,7 @@ const (
 
 // Get send get request
 func Get(URL string, form url.Values, options ...Option) (body []byte, err error) {
-	return
+	return withoutBody(http.MethodGet, URL, form, options...)
 }
 
 // withoutBody without or with body request
